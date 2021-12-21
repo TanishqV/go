@@ -49,12 +49,12 @@ func generateNums(part string) (res []string) {
 
 func validateNums(nums []string) {
 	for _,num := range nums {
-		fmt.Print(num)
+		fmt.Printf("%s", num)
 		manufacturer, ok, err := ccvalidator.Validate(num)
 		if ok {
-				fmt.Printf("||\tManufacturer: %s", manufacturer)
+			fmt.Printf("%s Manufacturer: %s", strings.Repeat(" ", 20-len(num)), manufacturer)
 		} else {
-				fmt.Printf("||\t%s", err)
+			fmt.Printf("%s %s", strings.Repeat(" ", 20-len(num)), err)
 		}
 		fmt.Println()
 	}
