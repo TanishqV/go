@@ -146,8 +146,22 @@ func TestValidate(t *testing.T) {
 		},
 		{
 			name:         "Discover",
-			cardNumber:   "6011 0009 9013 9424",
+			cardNumber:   "6522 6372 9193 4847",
 			manufacturer: "DISCOVER",
+			ok:           true,
+			err:          nil,
+		},
+		{
+			name:         "Maestro",
+			cardNumber:   "6759 6498 2643 8453",
+			manufacturer: "MAESTRO",
+			ok:           true,
+			err:          nil,
+		},
+		{
+			name:         "Dankort",
+			cardNumber:   "5019 5555 4444 5555",
+			manufacturer: "DANKORT",
 			ok:           true,
 			err:          nil,
 		},
@@ -156,8 +170,6 @@ func TestValidate(t *testing.T) {
 	for i := range testCases {
 		tc := testCases[i]
 		t.Run(tc.name, func(t *testing.T) {
-			// res, _ := generateNums("8451", 15)
-			// fmt.Println(res)
 			manufacturer, ok, err := Validate(tc.cardNumber)
 
 			require.Equal(t, tc.ok, ok)
