@@ -6,25 +6,31 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/tanishqv/mywebapp-go/pkg/config"
 )
+
+var app *config.AppConfig
+
+// NewTemplates sets the config for the template package
+func NewTemplates(a *config.AppConfig) {
+	app = a
+}
 
 // RenderTemplate renders templates using html/template
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
-	// Create a template cache
-	tc, err := createTemplateCache()
-	if err != nil {
-		log.Fatal(err)
-	}
+	// Get template cache from the app config
+	tc := app.TemplateCache
 
 	// Get requested template from cache
 	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal(err)
+		log.Fatal("could not get template from the template cache")
 	}
 
 	buf := new(bytes.Buffer)
 
-	err = t.Execute(buf, nil)
+	err := t.Execute(buf, nil)
 	if err != nil {
 		log.Println(err)
 	}
@@ -37,7 +43,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 }
 
 // Instead of adding layout templates manually, a new approach could be used
-func createTemplateCache() (map[string]*template.Template, error) {
+func CreateTemplateCache() (map[string]*template.Template, error) {
 	myCache := map[string]*template.Template{}
 
 	// N.B.: When rendering template that uses layout, the template should be parsed first, and then the layout
