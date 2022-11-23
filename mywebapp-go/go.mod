@@ -1,4 +1,4 @@
-module github.com/tanishqv/mywebapp-go
+module github.com/tanishqv/go/mywebapp-go
 
 go 1.19
 

@@ -3,9 +3,9 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/tanishqv/mywebapp-go/pkg/config"
-	"github.com/tanishqv/mywebapp-go/pkg/models"
-	"github.com/tanishqv/mywebapp-go/pkg/render"
+	"github.com/tanishqv/go/mywebapp-go/pkg/config"
+	"github.com/tanishqv/go/mywebapp-go/pkg/models"
+	"github.com/tanishqv/go/mywebapp-go/pkg/render"
 )
 
 // Handlers may not use template cache, but the config may be updated with things that makes the application run better
